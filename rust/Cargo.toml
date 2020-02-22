@@ -1,0 +1,13 @@
+[package]
+name = "mylib"
+version = "0.1.0"
+authors = ["Michiel Borkent <michielborkent@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate_type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jni = "0.14.0"

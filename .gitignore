@@ -1,0 +1,4 @@
+/clojure/target
+/clojure/clojure-rust
+/clojure/libmylib.dylib
+/rust/target
