@@ -1,6 +1,6 @@
 # clojure-rust-graalvm-native
 
-An example of calling Rust from Clojure compiled with GraalVM native-image.
+An example of calling Rust from a Clojure program, which is then compiled with GraalVM to a native binary.
 
 This repo is an adapted example of what is described in the README of the Rust
 [jni](https://docs.rs/jni/0.14.0/jni/) library.
