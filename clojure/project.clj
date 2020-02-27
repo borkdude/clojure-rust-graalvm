@@ -5,6 +5,7 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.1"]]
   :java-source-paths ["src-java"]
+  :main clj-rust.core
   :profiles {:uberjar {:aot :all
                        :main clj-rust.core}}
   :repl-options {:init-ns clj-rust.core})
