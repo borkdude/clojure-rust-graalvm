@@ -7,5 +7,7 @@
   :java-source-paths ["src-java"]
   :main clj-rust.core
   :profiles {:uberjar {:aot :all
-                       :main clj-rust.core}}
+                       :main clj-rust.core
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                                  "-Dclojure.spec.skip-macros=true"]}}
   :repl-options {:init-ns clj-rust.core})

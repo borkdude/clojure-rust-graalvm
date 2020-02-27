@@ -2,3 +2,4 @@
 /clojure/clojure-rust
 /clojure/libmylib.dylib
 /rust/target
+/target

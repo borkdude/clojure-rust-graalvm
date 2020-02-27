@@ -1,6 +1,8 @@
 # clojure-rust-graalvm-native
 
-An example of calling Rust from a Clojure program, which is then compiled with GraalVM to a native binary.
+An example of calling Rust from a Clojure program, which is then compiled with
+GraalVM to a native binary. It gets the amount of free memory via the
+[heim-rs](https://github.com/heim-rs/heim) library and prints it in EDN format.
 
 This repo is an adapted example of what is described in the README of the Rust
 [jni](https://docs.rs/jni/0.14.0/jni/) library.
@@ -8,58 +10,35 @@ This repo is an adapted example of what is described in the README of the Rust
 In `clojure/src-java` there is a Java static method which calls a Rust function
 via JNI. We call this static method from Clojure.
 
+## Usage
+
+``` shell
+$ time ./clojure-rust megabyte
+{:memory/free [:megabyte "1210"]}
+./clojure-rust megabyte   0.01s  user 0.01s system 34% cpu 0.027 total
+```
+
+Accepted options: `byte`, `megabyte`, `gigabyte`.
+
 ## Build
 
-To build this project, first build the Rust library.
+Prerequisites:
+
+- Download [GraalVM](https://www.graalvm.org/downloads/) and set `GRAALVM_HOME`
+- Install [lein](https://github.com/technomancy/leiningen)
+- Install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+
+Run `script/compile` to build the Rust lib, the Clojure uberjar and the GraalVM executable.
+
+Finally `cd` into the `target` where the final GraalVM executable + Rust library are located and run:
 
 ``` shell
-$ cd rust
-$ cargo build --release
+$ (cd target; ./clojure-rust byte)
+{:memory/free [:byte "896126976"]}
 ```
-
-This will create a `libmydylib.so` (Linux) or `libmydylib.dylib` (macOS) in `target/release`.
-Copy this file to the `clojure` directory:
-
-``` shell
-$ cp target/release/libmylib.dylib ../clojure
-```
-
-Now we will compile the Clojure project into an uberjar:
-
-``` shell
-$ cd ../clojure
-$ lein uberjar
-```
-
-Let's test it:
-
-``` shell
-$ java -jar target/clj-rust-0.1.0-SNAPSHOT-standalone.jar
-Hello from Clojure
-Hello, from Rust via Java!
-```
-
-Now the final part. We will compile the uberjar to a native using GraalVM:
-
-``` shell
-$ /Users/borkdude/Downloads/graalvm-ce-java8-19.3.1/Contents/Home/bin/native-image \
-  --initialize-at-build-time --no-server --no-fallback \
-  -jar target/clj-rust-0.1.0-SNAPSHOT-standalone.jar -H:Name=clojure-rust
-```
-
-Does it work?
-
-``` shell
-$ time ./clojure-rust
-Hello from Clojure
-Hello, from Rust via Java!
-./clojure-rust  0.00s user 0.00s system 48% cpu 0.018 total
-```
-
-Yes, and it's fast :-)
 
 ## License
 
-Copyright © 2019 Michiel Borkent
+Copyright © 2020 Michiel Borkent
 
 Distributed under the EPL License, same as Clojure. See LICENSE.

@@ -3,6 +3,9 @@
   (:gen-class))
 
 (defn -main
-  [& _args]
-  (println "Hello from Clojure")
-  (println (ClojureRust/helloFromRust)))
+  [& [unit]]
+  (if-not (contains? #{"byte" "megabyte" "gigabyte"} unit)
+    (binding [*out* *err*]
+      (println "Expected unit argument: byte, megabyte or gigabyte.")
+      (when unit (println "Got:" unit)))
+    (prn {:memory/free [(keyword unit) (ClojureRust/getFreeMemory unit)]})))
