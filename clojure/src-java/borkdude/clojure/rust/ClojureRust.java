@@ -6,9 +6,8 @@ public class ClojureRust {
     private static native String getFreeMemoryRust(String unit);
 
     // The rest is just regular ol' Java!
-    public static String getFreeMemory(String unit) {
-        System.loadLibrary("mylib"); // native-image doesn't support loading
-                                     // libraries from static initializer blocks
+
+    public static String getFreeMemory(String unit) throws java.io.IOException {
         String output = getFreeMemoryRust(unit);
         return output;
     }

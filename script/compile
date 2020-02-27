@@ -6,7 +6,7 @@ set -eo pipefail
 
 cd rust
 cargo build --release
-cp target/release/libmylib.dylib ../clojure
+cp target/release/libmylib.dylib ../clojure/resources
 
 # check graalvm settings and use its java compiler
 
@@ -24,7 +24,7 @@ cd ../clojure
 lein do clean, uberjar
 
 # test the uberjar
-java -jar target/clj-rust-0.1.0-SNAPSHOT-standalone.jar byte
+java -jar -Djava.library.path="$HOME/.clojure_rust" target/clj-rust-0.1.0-SNAPSHOT-standalone.jar byte
 
 # build the GraalVM compiled executable
 
@@ -34,6 +34,8 @@ args=( -jar target/clj-rust-0.1.0-SNAPSHOT-standalone.jar \
             "-J-Dclojure.spec.skip-macros=true" \
             "-J-Dclojure.compiler.direct-linking=true" \
             "--initialize-at-build-time" \
+            "-H:IncludeResources=libmylib.dylib" \
+            "-H:Log=registerResource:" \
             "-H:+JNI" \
             "--verbose" \
             "--no-fallback" \

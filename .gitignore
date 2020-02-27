@@ -1,5 +1,5 @@
 /clojure/target
 /clojure/clojure-rust
-/clojure/libmylib.dylib
+/clojure/resources/libmylib.dylib
 /rust/target
 /target
