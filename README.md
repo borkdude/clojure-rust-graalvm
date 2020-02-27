@@ -1,7 +1,7 @@
 # clojure-rust-graalvm-native
 
-An example of calling Rust from a Clojure program, which is then compiled with
-GraalVM to a native binary. It gets the amount of free memory via the
+An example of Clojure program calling a Rust library, all combined into one executable using GraalVM.
+It gets the amount of free memory via the
 [heim-rs](https://github.com/heim-rs/heim) library and prints it in EDN format.
 
 This repo is an adapted example of what is described in the README of the Rust
