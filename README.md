@@ -1,4 +1,4 @@
-# clojure-rust-graalvm-native
+# clojure-rust-graalvm
 
 An example of Clojure program calling a Rust library, all combined into one executable using GraalVM.
 It gets the amount of free memory via the
