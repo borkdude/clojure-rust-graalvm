@@ -30,7 +30,7 @@ Prerequisites:
 
 Run `script/compile` to build the Rust lib, the Clojure uberjar and the GraalVM executable.
 
-Finally `cd` into the `target` where the final GraalVM executable + Rust library are located and run:
+Finally, run the executable from the `target` directory:
 
 ``` shell
 $ (cd target; ./clojure-rust byte)
