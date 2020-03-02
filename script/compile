@@ -24,7 +24,7 @@ cd ../clojure
 lein do clean, uberjar
 
 # test the uberjar
-java -jar -Djava.library.path="$HOME/.clojure_rust" target/clj-rust-0.1.0-SNAPSHOT-standalone.jar byte
+java -jar -Djava.library.path="resources" target/clj-rust-0.1.0-SNAPSHOT-standalone.jar byte
 
 # build the GraalVM compiled executable
 
